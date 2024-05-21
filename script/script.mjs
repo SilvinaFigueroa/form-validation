@@ -19,7 +19,6 @@ username.addEventListener("change", validation);
 console.log(username)
 
 function validation(event) {
-
     uniqueChar(event)
 
 
@@ -27,34 +26,27 @@ function validation(event) {
 
 
 function uniqueChar(name) {
-    // let unique = "";
-    // let counter = 0;
+    let unique = 0;
+    
+    console.log(/n?/g.exec(name.target.value));
 
-
-    let patternUnique = /[^A-Za-z0-9]/g
-    let unique = patternUnique.test(name);
-    console.log(unique) 
-
-    // for (const i in name) {
-    //     let strname = name.target.value.split(i);
-    //     console.log(`split value ${strname}`)
-    //     counter = strname.length
-    //     console.log(counter)
-
-    //     if (counter <= 1) {
-    //         unique++
-    //     }
-    // }
-    // console.log(`unique ${unique}`)
-    // if (unique < 1) {
-    //     return true;
-    // }
-    // else {
-    //     username.focus();
-    //     alert(
-    //         "The username must contain at least two unique characters."
-    //     );
-    //     return false;
-    // }
+    for (const i of name.target.value) {
+        let nameChar = name.target.value.split(i).length - 1;
+        // console.log(`nameChar ${nameChar}`)
+        if (nameChar === 1)
+            unique++;
+    }
+    console.log(`unique ${unique}`)
+    if (unique >= 2) {
+        console.log(`Unique letters ${unique}`)
+        return true;
+    }
+    else {
+        username.focus();
+        alert(
+            "The username must contain at least two unique characters."
+        );
+        return false;
+    }
 }
 
